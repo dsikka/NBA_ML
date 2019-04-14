@@ -5,8 +5,8 @@ from basketball_reference_web_scraper import output
 
 # HAVE TO UPDATE YEAR VALUES AND CSV FILE NAMES FOR EACH SEASON
 
-year_month = {'first_half': {'year': 2017, 'months': np.linspace(10, 12, num=3)},
-'second_half': {'year': 2018, 'months': np.linspace(1, 6, num=6)}}
+year_month = {'first_half': {'year': 2014, 'months': np.linspace(10, 12, num=3)},
+'second_half': {'year': 2015, 'months': np.linspace(1, 6, num=6)}}
 days = np.linspace(1, 31, num=31)
 
 box_scores = {}
@@ -23,5 +23,4 @@ for k,v in year_month.items():
             if len(box_score) is not 0:
                 box_scores.update({date_formatted: box_score})
                 
-output.team_box_scores_to_csv(box_scores, '2017to2018.csv', 'w')
-
+output.team_box_scores_to_csv(box_scores, '2014to2015.csv', 'w')
