@@ -7,8 +7,8 @@ from basketball_reference_web_scraper import output
 
 # HAVE TO UPDATE YEAR VALUES AND CSV FILE NAMES FOR EACH SEASON
 
-year_month = {'first_half': {'year': 2017, 'months': np.linspace(10, 12, num=3)},
-'second_half': {'year': 2018, 'months': np.linspace(1, 6, num=6)}}
+year_month = {'first_half': {'year': 2012, 'months': np.linspace(10, 12, num=3)},
+'second_half': {'year': 2013, 'months': np.linspace(1, 6, num=6)}}
 days = np.linspace(1, 31, num=31)
 
 boxscores_1 = {}
@@ -29,10 +29,10 @@ for k,v in year_month.items():
                 boxscores_1.update({date_formatted: box_score_1})
                 boxscores_2.update({date_formatted: box_score_2})
 
-output.team_box_scores_to_csv_adv(boxscores_2, '2017to2018basic.csv', 'w')
-output.team_box_scores_to_csv(boxscores_1, '2017to2018adv.csv', 'w')
+output.team_box_scores_to_csv_adv(boxscores_2, '2012to2013adv.csv', 'w')
+output.team_box_scores_to_csv(boxscores_1, '2012to2013basic.csv', 'w')
 
-df1 = pd.read_csv('2017to2018basic.csv')
-df2 = pd.read_csv('2017to2018adv.csv')
+df1 = pd.read_csv('2012to2013adv.csv')
+df2 = pd.read_csv('2012to2013basic.csv')
 result = pd.concat([df2, df1], axis=1)
-result.to_csv("2017to2018combined.csv", index=False, encoding='utf-8-sig')
+result.to_csv("2012to2013combined.csv", index=False, encoding='utf-8-sig')
