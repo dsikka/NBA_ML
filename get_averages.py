@@ -19,10 +19,11 @@ season_end_year = 2018
 
 start_time = time.time() #for timing how this takes
 
-df = pd.read_csv('seasons_combined.csv')
-df = df.sort_values(by = ['season', 'team', 'date'])
+df = pd.read_csv('season_combined.csv')
+df = df.sort_values(by = ['Season', 'team', 'date'])
 
-averages_file = open('averages.csv', 'w')
+averages_file = open('averages/averages' + str(season_end_year - 1) + 'to' + \
+                     str(season_end_year) + '.csv', 'w')
 
 str_to_write = 'season,date,home_team'
 for i in range(2, len(df.columns) - 1):
@@ -40,10 +41,10 @@ for game in games:
     
     #can't calculate average from last 6 games if 6 games haven't been played yet
     date = game['start_time'].astimezone(est).strftime('%Y-%m-%d')
-    home_prev_games = df.loc[(df['season'] == season) & \
+    home_prev_games = df.loc[(df['Season'] == season) & \
                              (df['team'] == game['home_team'].value) & \
                              (df['date'] < date)]
-    away_prev_games = df.loc[(df['season'] == season) & \
+    away_prev_games = df.loc[(df['Season'] == season) & \
                              (df['team'] == game['away_team'].value) & \
                              (df['date'] < date)]
     if home_prev_games.shape[0] < 6 or away_prev_games.shape[0] < 6:
