@@ -26,9 +26,9 @@ averages_file = open('averages/averages' + str(season_end_year - 1) + 'to' + \
                      str(season_end_year) + '.csv', 'w')
 
 str_to_write = 'season,date,home_team'
-for i in range(2, len(df.columns) - 1):
+for i in range(3, len(df.columns)):
     str_to_write += ',' + df.columns[i] + '_home'
-for i in range(2, len(df.columns) - 1):
+for i in range(3, len(df.columns)):
     str_to_write += ',' + df.columns[i] + '_away'
 str_to_write += ',home_won\n'
 averages_file.write(str_to_write)
