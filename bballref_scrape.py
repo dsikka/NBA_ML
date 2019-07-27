@@ -1,11 +1,18 @@
-import numpy as np
 
+"""
+@author: dsikka
+- Script written to extract advanced and basic statistics for one season
+- Makes used of basketball_reference_web_scraper module, which has been modified 
+for this specific project 
+
+"""
+
+import numpy as np
 import pandas as pd
 
 from basketball_reference_web_scraper import client
 from basketball_reference_web_scraper import output
 
-# HAVE TO UPDATE YEAR VALUES AND CSV FILE NAMES FOR EACH SEASON
 
 year_month = {'first_half': {'year': 2012, 'months': np.linspace(10, 12, num=3)},
 'second_half': {'year': 2013, 'months': np.linspace(1, 6, num=6)}}
@@ -14,8 +21,6 @@ days = np.linspace(1, 31, num=31)
 boxscores_1 = {}
 boxscores_2 = {}
 
-# k gives first_half, second_half
-# v gives all the stored values
 
 for k,v in year_month.items():
     for month in v['months']:
