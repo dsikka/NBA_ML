@@ -1,3 +1,10 @@
+"""
+@dsikka
+- Script to experiment with different feature selection methods
+and compare/contract methods in terms of outputs given
+
+"""
+
 import os
 import pandas as pd 
 import sklearn.feature_selection
@@ -23,18 +30,7 @@ y = df['home_won']
 # Include all other training data apart from specific ones
 X = df.drop(['season', 'date', 'home_team', 'home_won'], axis=1)
 
-# Univariate feature selection
-# Different methods SelectKBest, SelectPercentile
-# using chi2 or f_classif results in slightly 
-# different answers
-
-# Should set max_depth and min_samples_leaf
 clf = RandomForestClassifier(n_estimators=10, random_state=0, n_jobs=-1)
-# Train model
-
-# Importance are "gini importance" or "mean decrease impurity" and is the "total decrease in node impurity weighted
-# by the probability of reaching the node"
-
 model = clf.fit(X, y)
 importances = model.feature_importances_
 # Sort feature importances in descending order
@@ -51,14 +47,11 @@ plt.show()
 
 # Feature selection using scores
 # Recursive feature elimination 
-# SelectFromModel
+
 rfecv = RFECV(estimator=clf, step=1, cv=StratifiedKFold(5),
               scoring='accuracy')
 selector = rfecv.fit(X, y)
 print("Optimal number of features : %d" % rfecv.n_features_)
-column_names_3 = X.columns[selector.get_support()]
-print(rfecv.ranking_)
-print(column_names_3)
 plt.figure()
 plt.xlabel("Number of features selected")
 plt.ylabel("Cross validation score (nb of correct classifications)")
@@ -66,8 +59,8 @@ plt.plot(range(1, len(rfecv.grid_scores_) + 1), rfecv.grid_scores_)
 plt.show()
 
 
-
-'''K = 10
+# Feature selection using selection of top %
+K = 10
 percentage = 18
 method = chi2
 X_indices = np.arange(X.shape[-1])
@@ -84,4 +77,3 @@ column_names_2 = X.columns[selected_vals_2.get_support()]
 # Print the selected top 5 features
 print(column_names)
 print(column_names_2)
-'''
